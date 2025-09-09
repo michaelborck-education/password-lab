@@ -1,7 +1,7 @@
 services:
   # Main hacking tools container
   hacking-tools:
-    image: alpine:latest
+    image: kalilinux/kali-rolling
     container_name: password-cracking-lab
     hostname: hacklab
     stdin_open: true
@@ -12,48 +12,36 @@ services:
       - ./wordlists:/wordlists
       - ./hashes:/hashes
       - ./scripts:/scripts
-    command: /bin/sh -c "
-      apk update && 
-      apk add --no-cache 
+    command: /bin/bash -c "
+      apt-get update && 
+      apt-get install -y 
         john 
-        john-doc 
         hydra 
         hashcat 
-        hashcat-utils 
-        openssh 
-        curl 
-        wget 
         python3 
-        py3-pip 
-        nano 
-        vim 
-        git 
-        build-base 
-        linux-headers &&
-      pip3 install --break-system-packages zxcvbn &&
+        python3-pip &&
+      pip3 install zxcvbn &&
       echo 'Lab environment ready!' &&
-      /bin/sh"
+      /bin/bash"
     cap_add:
       - NET_ADMIN
       - SYS_PTRACE
 
   # Target SSH server for Hydra practice
   ssh-target:
-    image: alpine:latest
+    image: ubuntu:22.04
     container_name: ssh-target
     hostname: target-server
     networks:
       - labnet
-    command: /bin/sh -c "
-      apk update &&
-      apk add --no-cache openssh openssh-server &&
+    command: /bin/bash -c "
+      apt-get update &&
+      apt-get install -y openssh-server &&
+      mkdir -p /var/run/sshd &&
       ssh-keygen -A &&
       echo 'root:password123' | chpasswd &&
-      echo 'admin:letmein' | chpasswd &&
-      adduser -D admin &&
-      echo 'admin:letmein' | chpasswd &&
-      adduser -D user1 &&
-      echo 'user1:qwerty' | chpasswd &&
+      useradd -m admin && echo 'admin:letmein' | chpasswd &&
+      useradd -m user1 && echo 'user1:qwerty' | chpasswd &&
       sed -i 's/#PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config &&
       sed -i 's/#PasswordAuthentication.*/PasswordAuthentication yes/' /etc/ssh/sshd_config &&
       echo 'SSH Target Server Ready' &&
