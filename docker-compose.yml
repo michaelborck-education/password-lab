@@ -15,7 +15,7 @@ services:
     command: /bin/bash -c "
       apt-get update && 
       apt-get install -y 
-        john 
+        john-the-ripper 
         hydra 
         hashcat 
         python3 
