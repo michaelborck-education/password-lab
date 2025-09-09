@@ -19,7 +19,8 @@ services:
         hydra 
         hashcat 
         python3 
-        python3-pip &&
+        python3-pip 
+        bash-completion &&
       pip3 install --break-system-packages zxcvbn &&
       echo 'Lab environment ready!' &&
       /bin/bash"
