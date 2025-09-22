@@ -1,4 +1,4 @@
-# Week 6: Password Security & Ethical Hacking Lab
+# Password Security & Ethical Hacking Lab
 ## CYB204 Ethical Hacking - Hands-on Password Security Module
 
 A comprehensive, beginner-friendly lab environment for teaching password security, ethical hacking principles, and professional penetration testing techniques.
@@ -30,7 +30,7 @@ This repository contains all materials needed to deliver a 90-minute hands-on wo
 ### Setup (2 minutes)
 ```bash
 # 1. Clone this repository
-git clone https://github.com/your-username/week06-password-security.git
+git clone https://github.com/your-username/password-security.git
 cd week06-password-security
 
 # 2. Run the setup script
@@ -150,19 +150,6 @@ week06-password-security/
 - Basic wordlist (10 passwords)
 - Extended wordlist (1000+ passwords)
 - Python scripts for hash generation/identification
-
----
-
-## 📝 Assignment Submission
-
-Students should submit:
-1. Completed worksheet (PDF)
-2. Screenshots showing successful password cracks (2-3 images)
-3. Reflection questions (200 words minimum)
-4. Optional: CTF challenge flags
-
-### Submission Template
-Available in `worksheets/submission-template.docx`
 
 ---
 
